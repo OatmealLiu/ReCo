@@ -1,22 +1,6 @@
 import torch
 from diffusers import StableDiffusionPipeline
 
-pipe = StableDiffusionPipeline.from_pretrained(
-    "j-min/reco_sd14_coco",
-    torch_dtype=torch.float16
-)
-pipe = pipe.to("cuda")
-
-
-prompt = "A box contains six donuts with varying types of glazes and toppings. <|endoftext|> <bin514> <bin575> <bin741> <bin765> <|startoftext|> chocolate donut. <|endoftext|> <bin237> <bin517> <bin520> <bin784> <|startoftext|> dark vanilla donut. <|endoftext|> <bin763> <bin575> <bin988> <bin745> <|startoftext|> donut with sprinkles. <|endoftext|> <bin234> <bin281> <bin524> <bin527> <|startoftext|> donut with powdered sugar. <|endoftext|> <bin515> <bin259> <bin767> <bin514> <|startoftext|> pink donut. <|endoftext|> <bin753> <bin289> <bin958> <bin506> <|startoftext|> brown donut. <|endoftext|>"
-generated_image = pipe(
-    prompt,
-    guidance_scale=4).images[0]
-
-
-
-generated_image
-
 
 def create_reco_prompt(
         caption: str = '',
@@ -67,6 +51,28 @@ def create_reco_prompt(
 
     text = " ".join(box_captions_with_coords)
     return text
+
+
+if __name__ == "__main__":
+    pipe = StableDiffusionPipeline.from_pretrained(
+        "j-min/reco_sd14_coco",
+        torch_dtype=torch.float16
+    )
+    pipe = pipe.to("cuda")
+
+
+    prompt = "A box contains six donuts with varying types of glazes and toppings. <|endoftext|> <bin514> <bin575> <bin741> <bin765> <|startoftext|> chocolate donut. <|endoftext|> <bin237> <bin517> <bin520> <bin784> <|startoftext|> dark vanilla donut. <|endoftext|> <bin763> <bin575> <bin988> <bin745> <|startoftext|> donut with sprinkles. <|endoftext|> <bin234> <bin281> <bin524> <bin527> <|startoftext|> donut with powdered sugar. <|endoftext|> <bin515> <bin259> <bin767> <bin514> <|startoftext|> pink donut. <|endoftext|> <bin753> <bin289> <bin958> <bin506> <|startoftext|> brown donut. <|endoftext|>"
+    generated_image = pipe(
+        prompt,
+        guidance_scale=4
+    ).images[0]
+
+
+
+generated_image
+
+
+
 
 
 caption = "a photo of bus and boat; boat is left to bus."
