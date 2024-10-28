@@ -1,4 +1,4 @@
-name: reco_env
+name: reco
 channels:
   - pytorch
   - defaults
