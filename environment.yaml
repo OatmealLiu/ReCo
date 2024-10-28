@@ -6,7 +6,7 @@ dependencies:
   - python=3.8.10
   - pip=20.3
   - cudatoolkit=11.3
-  - pytorch=1.12.1+cu113
+  - pytorch=1.12.1
   - torchvision=0.13.1
   - numpy=1.22.3
   - pip:
@@ -26,6 +26,5 @@ dependencies:
     - transformers==4.18.0
     - torchmetrics==0.6.0
     - kornia==0.6
-    - -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
     - -e git+https://github.com/openai/CLIP.git@main#egg=clip
     - -e .
